@@ -25,12 +25,18 @@ Player Class: Represents the player, with properties like health, score, and met
 Enemy Class: For the space enemies, with properties (health, speed) and behaviors (advance, attack).
 
 Weapon Class: Define various weapons or defenses the player can use.
+
+
 Inheritance and Polymorphism
 
 You might have different types of enemies or weapons, which can inherit from a base class and override certain behaviors.
+
+
 Encapsulation and Abstraction
 
 Keep internal workings of classes private, exposing only what is necessary to other parts of your code.
+
+
 Game Logic and Flow
 
 Input Handling: Implement a way to read and process console commands.
