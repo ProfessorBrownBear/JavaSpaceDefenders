@@ -1,5 +1,7 @@
-Certainly! The `Player` class in your "Space Defenders" game will represent the player character. This class will include properties such as health and score, and methods to move or attack. 
+The `Player` class in your "Space Defenders" game will represent the player character. This class will include properties such as health and score, and methods to move or attack. 
   Here's an example of how you might structure the `Player` class in Java:
+
+In light of the updated code base and interactions with the `Weapon` class, we will modify the `Player` class to include weapon handling. The `Player` will now be able to switch weapons and use the current weapon for attacks. Let's enhance the `Player` class accordingly:
 
 ```java
 public class Player {
@@ -7,26 +9,32 @@ public class Player {
     private int score;
     private int positionX;
     private int positionY;
+    private Weapon currentWeapon; // Reference to the current weapon
 
     public Player() {
-        this.health = 100;  // Starting health
+        this.health = 100; // Starting health
         this.score = 0;
-        this.positionX = 0;  // Initial position
-        this.positionY = 0;  // Initial position
+        this.positionX = 0; // Initial position
+        this.positionY = 0; // Initial position
+        this.currentWeapon = null; // Player starts without a weapon
     }
 
     // Method to move the player
     public void move(int deltaX, int deltaY) {
         this.positionX += deltaX;
         this.positionY += deltaY;
-        // You might want to add boundary checks here
+        // Add boundary checks as necessary
     }
 
-    // Method to attack
+    // Method to attack using the current weapon
     public void attack() {
-        // Implement attack logic
-        // Could be reducing health of enemy, etc.
-        System.out.println("Attacking!");
+        if (currentWeapon != null && currentWeapon.getAmmo() > 0) {
+            currentWeapon.use();
+            // Additional attack logic can be implemented here
+            System.out.println("Attacking with " + currentWeapon.getName());
+        } else {
+            System.out.println("No weapon equipped or out of ammo!");
+        }
     }
 
     // Method to take damage
@@ -41,6 +49,12 @@ public class Player {
     // Method to increase score
     public void increaseScore(int points) {
         this.score += points;
+    }
+
+    // Method to equip a weapon
+    public void equipWeapon(Weapon weapon) {
+        this.currentWeapon = weapon;
+        System.out.println("Equipped " + weapon.getName());
     }
 
     // Getters
@@ -60,9 +74,21 @@ public class Player {
         return positionY;
     }
 
-    // Setters, if needed, could be added here
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    // Setters if needed can be added here
 }
 ```
+
+### Key Enhancements:
+
+- **Weapon Handling**: The `Player` now has a `currentWeapon` field. The `equipWeapon` method allows the player to equip different weapons.
+- **Attack Method**: The `attack` method is updated to use the `currentWeapon`. It checks if the player has a weapon and if it has ammo before attacking.
+- **Modularity**: This approach allows for easy extension of the game with new weapons and attack strategies.
+
+This revised `Player` class integrates weapon handling into the player's actions, making the gameplay more dynamic and interesting. As the game development progresses, you can further refine and expand these mechanics to suit your game's design and objectives.
 
 ### Key Components:
 
